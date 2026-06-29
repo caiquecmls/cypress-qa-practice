@@ -174,11 +174,6 @@ describe('Carrinho - SauceDemo', () => {
 
 //um erro proposital no usuário problem_user, que não consegue remover produtos do carrinho.
 describe('problem_user - SauceDemo', () => {
-
-    beforeEach(() => {
-        cy.visit("https://www.saucedemo.com/")
-    })
-
     it('Tentativa de remover produto do carrinho', () => {
 
     beforeEach(() => {

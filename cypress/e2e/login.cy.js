@@ -8,7 +8,8 @@ describe('Login - SauceDemo', () =>{
     })
 
     it('Realizar login com sucesso', ()=>{
-        login.login(Cypress.env('username'), Cypress.env('password'))
+        //login.login(Cypress.env('username'), Cypress.env('password'))
+        login.login('standard_user', 'secret_sauce')
         cy.url().should('include', '/inventory.html')
         inventory.logo().should('have.text', 'Swag Labs');
         cy.screenshot('login com sucesso')
