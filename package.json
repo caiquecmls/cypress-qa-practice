@@ -1,0 +1,35 @@
+{
+  "name": "cypress",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "cy:run:chrome": "cypress run --browser chrome",
+    "cy:run:edge": "cypress run --browser edge",
+    "cy:run:firefox": "cypress run --browser firefox",
+    "cy:run:electron": "cypress run --browser electron",
+    "cy.open:chrome": "cypress open --browser chrome",
+    "cy.open:edge": "cypress open --browser edge",
+    "cy.open:firefox": "cypress open --browser firefox",
+    "cy.open:electron": "cypress open --browser electron",
+    "cy.run:chrome": "cypress run --browser chrome",
+    "cy.run:edge": "cypress run --browser edge",
+    "cy.run:firefox": "cypress run --browser firefox",
+    "cy.run:electron": "cypress run --browser electron",
+    "cypress:open:dev": "cypress open --config-file config-dev.js --browser chrome",
+    "cypress:open:qa": "cypress open --config-file config-qa.js --browser chrome"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "cypress": "^15.18.0",
+    "cypress-mochawesome-reporter": "^4.0.2",
+    "cypress-multi-reporters": "^2.0.5",
+    "dotenv": "^17.4.2",
+    "mocha-junit-reporter": "^2.2.1"
+  }
+}
