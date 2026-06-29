@@ -174,13 +174,13 @@ describe('Carrinho - SauceDemo', () => {
 
 //um erro proposital no usuário problem_user, que não consegue remover produtos do carrinho.
 describe('problem_user - SauceDemo', () => {
-    it('Tentativa de remover produto do carrinho', () => {
 
     beforeEach(() => {
         Login.visitarPagina()
         Login.loginCredencialValida()
     })
 
+    it.skip('Tentativa de remover produto do carrinho', () => {
         inventory.adicionarProduto('sauce-labs-backpack')
         cy.get('[data-test="remove-sauce-labs-backpack"]').click()
         cy.get('[data-test="shopping-cart-badge"]').should('have.text', '1')

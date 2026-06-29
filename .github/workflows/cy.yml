@@ -1,21 +1,42 @@
 name: End-to-end tests
-on: push
+
+on:
+  push:
+  pull_request:
+
 jobs:
   cypress-run:
     runs-on: ubuntu-24.04
+
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
-      # Install dependencies with caching
-      # and run all Cypress tests
-      - name: Cypress run
-        uses: cypress-io/github-action@v7
+        uses: actions/checkout@v4
+
+      - name: Run Cypress Tests
+        uses: cypress-io/github-action@v6
+        with:
+          install: true
+
+      - name: Upload Mochawesome Report
+        if: always()
+        uses: actions/upload-artifact@v4
         with:
           name: cypress-reports
           path: cypress/reports
-          if-no-files-found: ignore # 'warn' or 'error' are also available, defaults to `warn`
-      - uses: actions/upload-artifact@v7
+          if-no-files-found: ignore
+
+      - name: Upload Videos
+        if: always()
+        uses: actions/upload-artifact@v4
         with:
           name: cypress-videos
           path: cypress/videos
-          if-no-files-found: ignore # 'warn' or 'error' are also available, defaults to `warn`
+          if-no-files-found: ignore
+
+      - name: Upload Screenshots
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+          if-no-files-found: ignore
