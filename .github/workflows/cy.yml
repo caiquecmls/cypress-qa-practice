@@ -16,6 +16,19 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           install: true
+          browser: chrome
+
+      - name: List generated files
+        if: always()
+        run: |
+          echo "===== Reports ====="
+          ls -R cypress/reports || true
+
+          echo "===== Screenshots ====="
+          ls -R cypress/screenshots || true
+
+          echo "===== Videos ====="
+          ls -R cypress/videos || true
 
       - name: Upload Mochawesome Report
         if: always()
