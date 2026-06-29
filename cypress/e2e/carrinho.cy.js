@@ -30,7 +30,7 @@ describe('Carrinho - SauceDemo', () => {
         cy.screenshot('adicionar múltiplos produtos')
     })
 
-    it.only('Validar carrinho', () => {
+    it('Validar carrinho', () => {
         inventory.adicionarProduto('sauce-labs-backpack')
         inventory.adicionarProduto('sauce-labs-bolt-t-shirt')
         cy.get('[data-test="shopping-cart-badge"]').should('have.text', '2')
@@ -51,7 +51,7 @@ describe('Carrinho - SauceDemo', () => {
     })
 
     it('Validar First Name obrigatório no checkout', () => {
-        cy.adicionarProduto('sauce-labs-backpack')
+        inventory.adicionarProduto('sauce-labs-backpack')
         cy.abrirCarrinho()
         cy.get('[data-test="checkout"]').click()
         cy.cadastrarUsuario('', 'Silva', '12345')
@@ -60,7 +60,7 @@ describe('Carrinho - SauceDemo', () => {
     })
 
     it('Validar Last Name obrigatório no checkout', () => {
-        cy.adicionarProduto('sauce-labs-backpack')
+        inventory.adicionarProduto('sauce-labs-backpack')
         cy.abrirCarrinho()
         cy.get('[data-test="checkout"]').click()
         cy.cadastrarUsuario('João', '', '12345')
@@ -69,7 +69,7 @@ describe('Carrinho - SauceDemo', () => {
     })
 
     it('Validar Postal Code obrigatório no checkout', () => {
-        cy.adicionarProduto('sauce-labs-backpack')
+        inventory.adicionarProduto('sauce-labs-backpack')
         cy.abrirCarrinho()
         cy.get('[data-test="checkout"]').click()
         cy.cadastrarUsuario('João', 'Silva', '')
@@ -78,7 +78,7 @@ describe('Carrinho - SauceDemo', () => {
     })
 
     it('Prosseguir para o resumo do pedido', () => {
-        cy.adicionarProduto('sauce-labs-backpack')
+        inventory.adicionarProduto('sauce-labs-backpack')
         cy.abrirCarrinho()
         cy.get('[data-test="checkout"]').click()
         cy.cadastrarUsuario('João', 'Silva', '12345')
@@ -103,7 +103,7 @@ describe('Carrinho - SauceDemo', () => {
             });
 
         // Fluxo do usuário
-        cy.adicionarProduto('sauce-labs-backpack')
+        inventory.adicionarProduto('sauce-labs-backpack')
         cy.abrirCarrinho()
         cy.get('[data-test="checkout"]').click()
         cy.cadastrarUsuario('João', 'Silva', '12345')
@@ -161,7 +161,7 @@ describe('Carrinho - SauceDemo', () => {
     })
 
     it('Finalizar pedido', () => {
-        cy.adicionarProduto('sauce-labs-backpack')
+        inventory.adicionarProduto('sauce-labs-backpack')
         cy.abrirCarrinho()
         cy.get('[data-test="checkout"]').click()
         cy.cadastrarUsuario('João', 'Silva', '12345')
@@ -172,6 +172,7 @@ describe('Carrinho - SauceDemo', () => {
     })
 })
 
+//um erro proposital no usuário problem_user, que não consegue remover produtos do carrinho.
 describe('problem_user - SauceDemo', () => {
 
     beforeEach(() => {
@@ -179,8 +180,13 @@ describe('problem_user - SauceDemo', () => {
     })
 
     it('Tentativa de remover produto do carrinho', () => {
-        cy.login('problem_user', 'secret_sauce')
-        cy.adicionarProduto('sauce-labs-backpack')
+
+    beforeEach(() => {
+        Login.visitarPagina()
+        Login.loginCredencialValida()
+    })
+
+        inventory.adicionarProduto('sauce-labs-backpack')
         cy.get('[data-test="remove-sauce-labs-backpack"]').click()
         cy.get('[data-test="shopping-cart-badge"]').should('have.text', '1')
         cy.get('[data-test="add-to-cart-sauce-labs-backpack"]').should('have.text', 'Add to cart')

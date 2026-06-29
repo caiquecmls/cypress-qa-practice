@@ -7,7 +7,7 @@ describe('Login - SauceDemo', () =>{
         login.visitarPagina()
     })
 
-    it.only('Realizar login com sucesso', ()=>{
+    it('Realizar login com sucesso', ()=>{
         login.login(Cypress.env('username'), Cypress.env('password'))
         cy.url().should('include', '/inventory.html')
         inventory.logo().should('have.text', 'Swag Labs');
